@@ -2,7 +2,7 @@ check:
   image: node:20.10.0-alpine
   script:
     - npm i
-    - if [ -e **/*.html ]; then npm run lint-html; fi
+    - if [ -n "$(find public -type f -name '*.html' -print)" ]; then npm run lint-html; fi
     - npm run lint
   cache:
     - key:
