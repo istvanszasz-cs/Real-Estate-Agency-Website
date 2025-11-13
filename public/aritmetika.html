@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="aritmetika.css">
+    <script src="javascript.js" defer></script>
+</head>
+<body>
+    <div id="keret">
+        <h1>Aritmetikai gyakorló feladatok</h1>
+        <div id="formdiv">
+            <form id="form">
+                <label for="nev">Név:</label>
+                <input type="text" required><br>
+                <label for="muvelet">Művelet(ek):</label>
+                <input type="checkbox">+
+                <input type="checkbox">-
+                <input type="checkbox">*
+                <input type="checkbox">/<br><br>
+                <label for="muvelet">Feladatok száma (5-10):</label>
+                <input type="number" id="feladatszam" min="5" max="10" required><br>
+                <p>Játék indítása és újrakezdése:</p>
+                <button type="button" id="gomb">Varázsgomb</button>
+            </form>
+        </div>
+        <canvas id="rajzolo"></canvas>
+    </div>
+</body>
+
+</html>
