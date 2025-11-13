@@ -74,7 +74,7 @@ function feladatokGeneralasa() {
     const op1 = Math.floor(Math.random() * 101);
     let op2 = Math.floor(Math.random() * 101);
     const op = muveletek[Math.floor(Math.random() * muveletek.length)];
-    let eredmeny;
+    let eredmeny = 0;
     if (op === '+') eredmeny = op1 + op2;
     else if (op === '-') eredmeny = op1 - op2;
     else if (op === '*') eredmeny = op1 * op2;
@@ -155,6 +155,7 @@ function valaszokEllenorzese() {
 let kivalasztottBal = -1;
 function balClick(x, y) {
   for (let i = 0; i < balTeglalap.length; i++) {
+    const teglalap = balTeglalap[i];
     if (
       x > balTeglalap[i].x &&
       x < balTeglalap[i].x + balTeglalap[i].szelesseg &&
@@ -163,7 +164,7 @@ function balClick(x, y) {
     ) {
       // for ciklus nelkul is tudjuk ellenorizni, hogy benne van-e,
       // a some fuggveny segitsegevel
-      const marVanVonal = vonalak.some((v) => v.balIndex === balTeglalap[i].index);
+      const marVanVonal = vonalak.some((v) => v.balIndex === teglalap.index);
       if (marVanVonal) {
         alert('Ehhez a feladathoz már húztál eredményt!');
         kivalasztottBal = -1;
@@ -183,13 +184,14 @@ function balClick(x, y) {
 
 function jobbClick(x, y) {
   for (let i = 0; i < jobbTeglalap.length; i++) {
+    const teglalap = jobbTeglalap[i];
     if (
       x > jobbTeglalap[i].x &&
       x < jobbTeglalap[i].x + jobbTeglalap[i].szelesseg &&
       y > jobbTeglalap[i].y &&
       y < jobbTeglalap[i].y + jobbTeglalap[i].magassag
     ) {
-      const marVanVonal = vonalak.some((v) => v.jobbIndex === jobbTeglalap[i].index);
+      const marVanVonal = vonalak.some((v) => v.jobbIndex === teglalap.index);
       if (marVanVonal) {
         alert('Ezt az eredményt már hozzárendelted egy feladathoz!');
         kivalasztottBal = -1;
