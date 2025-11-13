@@ -52,6 +52,7 @@ let vonalak = [];
 let balTeglalap = [];
 let jobbTeglalap = [];
 let jatekAktiv = false;
+let eredmeny = 0;
 
 function feladatokGeneralasa() {
   const fsz = Number(document.getElementById('feladatszam').value);
@@ -74,7 +75,6 @@ function feladatokGeneralasa() {
     const op1 = Math.floor(Math.random() * 101);
     let op2 = Math.floor(Math.random() * 101);
     const op = muveletek[Math.floor(Math.random() * muveletek.length)];
-    let eredmeny = 0;
     if (op === '+') eredmeny = op1 + op2;
     else if (op === '-') eredmeny = op1 - op2;
     else if (op === '*') eredmeny = op1 * op2;
