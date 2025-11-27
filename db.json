@@ -1,0 +1,22 @@
+{
+  "lakasok": [
+    {
+      "id": 1,
+      "varos": "a",
+      "negyed": "b",
+      "terulet": 1,
+      "ar": 2,
+      "szoba": 3,
+      "kepURL": "./uploads/lakas_1_img.jpg"
+    },
+    {
+      "id": 2,
+      "varos": "a",
+      "negyed": "b",
+      "terulet": 1,
+      "ar": 2,
+      "szoba": 3,
+      "kepURL": null
+    }
+  ]
+}

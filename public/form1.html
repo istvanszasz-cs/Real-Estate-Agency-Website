@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="hun">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hirdetes letrehozo</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="stilus.css">
+</head>
+<body>
+    <div id="keret">
+        <form action="/letrehozas" method="POST">
+            <p>Lakás címe (város): <input type="text" name="varos"></p>
+            <p>Lakás címe (negyed): <input type="text" name="negyed"></p>
+            <p>Felszínterületét: <input type="number" name="terulet" min="0"></p>
+            <p>Ára: <input type="number" name="ar" min="0"></p>
+            <p>Szobák száma: <input type="number" name="szoba" min="0"></p>
+            <input type="submit" value="Feltöltés">
+        </form>
+    </div>
+</body>
+</html>
