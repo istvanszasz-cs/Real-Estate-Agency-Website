@@ -282,3 +282,4 @@ Thumbs.db
 .DS_Store
 
 .uploads/
+.db.json

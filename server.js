@@ -124,10 +124,10 @@ app.post('/letrehozas', async (request, response) => {
 });
 
 app.get('/kereses', async (request, response) => {
-  const minAr = Number(request.query.minAr) || 0;
-  const maxAr = Number(request.query.maxAr) || Infinity;
-  const minSzoba = Number(request.query.minSzoba) || 0;
-  const maxSzoba = Number(request.query.maxSzoba) || Infinity;
+  const minAr = Number(request.query.min_ar) || 0;
+  const maxAr = Number(request.query.max_ar) || Infinity;
+  const minSzoba = Number(request.query.min_szoba) || 0;
+  const maxSzoba = Number(request.query.max_szoba) || Infinity;
   const varos = request.query.varos ? request.query.varos.toString().toLowerCase() : '';
   const negyed = request.query.negyed ? request.query.negyed.toString().toLowerCase() : '';
 
