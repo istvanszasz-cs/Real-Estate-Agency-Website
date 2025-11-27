@@ -16,6 +16,15 @@
       "terulet": 1,
       "ar": 2,
       "szoba": 3,
+      "kepURL": "./uploads/lakas_2_img.png"
+    },
+    {
+      "id": 3,
+      "varos": "Kolozsvar",
+      "negyed": "Monostor",
+      "terulet": 32,
+      "ar": 154455,
+      "szoba": 3,
       "kepURL": null
     }
   ]

@@ -1,32 +1,30 @@
 import express from 'express';
-import { Low, JSONFile } from 'lowdb';
 import morgan from 'morgan';
 import fs from 'fs';
 import multer from 'multer';
 import path from 'path';
+import Datastore from 'nedb-promises';
 
-const file = new JSONFile('db.json');
-const defaultData = { lakasok: [] };
-const db = new Low(file, defaultData);
+const db = Datastore.create({
+  filename: 'lakasok.db',
+  autoload: true,
+});
+
 let id = 1;
 const app = express();
 app.use(express.static('.'));
 app.use(morgan('tiny'));
 app.use(express.urlencoded({ extended: true }));
-app.use('uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads'));
 
 const uploadDir = './uploads';
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
 }
 async function init() {
-  try {
-    await db.read();
-  } catch (error) {
-    console.error('Hiba az adatbázis beolvasásakor!', error);
-  }
-  if (db.data.lakasok.length > 0) {
-    id = db.data.lakasok[db.data.lakasok.length - 1].id + 1;
+  const lakasok = await db.find({}).sort({ id: 1 });
+  if (lakasok.length > 0) {
+    id = lakasok[lakasok.length - 1].id + 1;
   }
 }
 const multerUpload = multer({
@@ -44,8 +42,7 @@ app.post('/kep_feltoltes', multerUpload.single('file'), async (request, response
   }
 
   const lakasId = Number(request.body.id);
-  await db.read();
-  const lakas = db.data.lakasok.find((l) => l.id === lakasId);
+  const lakas = await db.findOne({ id: lakasId });
   if (!lakas) {
     response.set('Content-Type', 'text/plain; charset=utf-8');
     response.status(400).send('Hiba: Nincs ilyen ID-jú lakás az adatbázisban!');
@@ -59,14 +56,14 @@ app.post('/kep_feltoltes', multerUpload.single('file'), async (request, response
     response.status(400).send('Hiba: Érvénytelen fájltípus! Csak képfájlok engedélyezettek.');
     return;
   }
-  const ujElérésiÚt = `${uploadDir}/lakas_${lakasId}_img${kiterjesztes}`;
-  fs.renameSync(request.file.path, ujElérésiÚt);
+  const ujEleresiUt = `${uploadDir}/lakas_${lakasId}_img${kiterjesztes}`;
+  fs.renameSync(request.file.path, ujEleresiUt);
 
-  lakas.kepURL = ujElérésiÚt;
-  await db.write();
+  lakas.kepURL = ujEleresiUt;
+  await db.update({ id: lakasId }, { $set: { kepURL: ujEleresiUt } });
 
   response.set('Content-Type', 'text/plain; charset=utf-8');
-  response.send(`Sikeres kép feltöltés! Lakás ID: ${lakasId}, Kép elérési út: ${ujElérésiÚt}`);
+  response.send(`Sikeres kép feltöltés! Lakás ID: ${lakasId}, Kép elérési út: ${ujEleresiUt}`);
 });
 
 app.post('/letrehozas', async (request, response) => {
@@ -111,9 +108,7 @@ app.post('/letrehozas', async (request, response) => {
   Ár: ${request.body.ar}
   Szobák száma: ${request.body.szoba}`;
   console.log(uzenet);
-  await db.read();
-  db.data.lakasok.push(ujLakas);
-  await db.write();
+  await db.insert(ujLakas);
 
   response.set('Content-Type', 'text/plain; charset=utf-8');
   response.send(`Sikeres adatküldés!\nID: ${ujLakas.id}\n${uzenet}`);
@@ -139,15 +134,10 @@ app.get('/kereses', async (request, response) => {
   const varos = request.query.varos ? request.query.varos.toString().toLowerCase() : '';
   const negyed = request.query.negyed ? request.query.negyed.toString().toLowerCase() : '';
 
-  await db.read();
-  let talalatok = '';
-  for (const lakas of db.data.lakasok) {
-    if (megfelel(lakas, minAr, maxAr, minSzoba, maxSzoba, varos, negyed)) {
-      talalatok += `ID: ${lakas.id}\nVáros: ${lakas.varos}\nNegyed: ${lakas.negyed}\nFelszínterület: ${lakas.terulet}\nÁr: ${lakas.ar}\nSzobák száma: ${lakas.szoba}\nKép elérési út: ${lakas.kepURL ? lakas.kepURL : 'Nincs kép feltöltve'}\n\n`;
-    }
-  }
+  const lakasok = await db.find({});
+  const talalatok = lakasok.filter((lakas) => megfelel(lakas, minAr, maxAr, minSzoba, maxSzoba, varos, negyed));
   response.set('Content-Type', 'application/json; charset=utf-8');
-  response.send(talalatok ? talalatok : 'Nincs találat a keresési feltételeknek megfelelően.');
+  response.send(JSON.stringify(talalatok));
 });
 app.listen(3000, () => {
   console.log('Szerver fut a 3000-es porton');
