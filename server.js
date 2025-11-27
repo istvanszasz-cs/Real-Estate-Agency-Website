@@ -1,6 +1,5 @@
 import express from 'express';
-import { Low } from 'lowdb';
-import { JSONFile } from 'lowdb/node';
+import { Low, JSONFile } from 'lowdb';
 import morgan from 'morgan';
 import fs from 'fs';
 import multer from 'multer';
@@ -20,7 +19,6 @@ const uploadDir = './uploads';
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
 }
-
 async function init() {
   try {
     await db.read();
@@ -31,7 +29,6 @@ async function init() {
     id = db.data.lakasok[db.data.lakasok.length - 1].id + 1;
   }
 }
-
 const multerUpload = multer({
   dest: uploadDir,
   limits: {
@@ -74,7 +71,7 @@ app.post('/kep_feltoltes', multerUpload.single('file'), async (request, response
 
 app.post('/letrehozas', async (request, response) => {
   const ujLakas = {
-    id: id,
+    id,
     varos: request.body.varos,
     negyed: request.body.negyed,
     terulet: Number(request.body.terulet),
@@ -119,9 +116,20 @@ app.post('/letrehozas', async (request, response) => {
   await db.write();
 
   response.set('Content-Type', 'text/plain; charset=utf-8');
-  response.send('Sikeres adatküldés!\nID: ' + ujLakas.id + '\n' + uzenet);
+  response.send(`Sikeres adatküldés!\nID: ${ujLakas.id}\n${uzenet}`);
   id++;
 });
+
+function megfelel(lakas, minAr, maxAr, minSzoba, maxSzoba, varos, negyed) {
+  return (
+    lakas.ar >= minAr &&
+    lakas.ar <= maxAr &&
+    lakas.szoba >= minSzoba &&
+    lakas.szoba <= maxSzoba &&
+    lakas.varos.toLowerCase().includes(varos) &&
+    lakas.negyed.toLowerCase().includes(negyed)
+  );
+}
 
 app.get('/kereses', async (request, response) => {
   const minAr = Number(request.query.min_ar) || 0;
@@ -134,14 +142,7 @@ app.get('/kereses', async (request, response) => {
   await db.read();
   let talalatok = '';
   for (const lakas of db.data.lakasok) {
-    if (
-      lakas.ar >= minAr &&
-      lakas.ar <= maxAr &&
-      lakas.szoba >= minSzoba &&
-      lakas.szoba <= maxSzoba &&
-      lakas.varos.toLowerCase().includes(varos) &&
-      lakas.negyed.toLowerCase().includes(negyed)
-    ) {
+    if (megfelel(lakas, minAr, maxAr, minSzoba, maxSzoba, varos, negyed)) {
       talalatok += `ID: ${lakas.id}\nVáros: ${lakas.varos}\nNegyed: ${lakas.negyed}\nFelszínterület: ${lakas.terulet}\nÁr: ${lakas.ar}\nSzobák száma: ${lakas.szoba}\nKép elérési út: ${lakas.kepURL ? lakas.kepURL : 'Nincs kép feltöltve'}\n\n`;
     }
   }
