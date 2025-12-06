@@ -1,0 +1,324 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body{
+    /*A HTML törzsében legyen (a szöveggel együtt gördülő) háttérkép 
+    (lehetőleg ne legyen túl sötét kép),mely az x és y tengely mentén egyaránt ismétlődik.*/
+    background-image: url(news.png);
+     background-repeat: repeat;
+    background-attachment: scroll;
+    background-size: 200px;
+  font-family: "Consolas", "Courier New";    
+}
+.hatter{
+  background-image: url('background.jpg');
+  width: 100%;
+  background-repeat: repeat-x;
+  height: 1000px ;
+  
+}
+
+/*Elemtípusra vonatkozó szelektorok (osztály/ID nélkül) segítségével oldjuk meg, hogy a főcím (h1) és
+alcím (h2) színe, háttérszíne, betű-típus családja legyen egyforma. */
+h1, h2{
+  background-color: rgb(255, 145, 145);
+  color: rgb(77, 77, 77);
+  font-size: 35pt;
+  padding-top: 30px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+
+/* Definiáljunk (és használjunk a HTML oldalon) két különböző stílusú (sorszám nélküli) listát.
+Használjunk olyan szelektort, ami az elemtípus és az osztályra is megkötést tesz. */
+ul.lista1 {
+  font-size: 12pt;
+  height: 60px;
+  list-style: none;
+  margin: 40px;
+  margin-top: 0;
+  padding-top: 0;
+  gap: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right,rgb(230, 230, 230),rgb(255, 255, 255),rgb(230, 230, 230))
+}
+
+
+
+/* • Általános stílusosztály (osztály, mely nincs ráhúzva egy elemtípusra) 
+segítségével oldjuk meg, hogykülönböző HTML elemek stílusa (szín, betűméret,
+ szöveg-igazítása, szöveg-díszítése) ugyanaz legyen. 
+ Alkalmazzuk ugyanazt a stílusosztályt az em és p elemekre. */
+.altalanos_stilus
+{
+  color: black;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Adjuk meg (kontextussal megadott szelektort használva) egy nav elemben elhelyezkedő 
+div elem stílusát (kerekített szegély, szövegméret). */
+
+nav div{
+  border-radius: 40px;
+  height: 60px;
+  background-color: rgb(230, 230, 230);
+  padding-top: 0;
+}
+
+/* Definiáljunk két különböző hivatkozás (link) típust, melyeknek más és más a színe, szövegdíszítése
+ha rámegyünk az egérrel, ha aktív, ha már meglátogattuk */
+#fejlec a
+{
+  font-weight: 600;
+  color: blue;                
+  text-decoration: none; 
+  transition: color 0.5s ease
+}
+
+#fejlec a:hover
+{
+  color: red;
+}
+
+a.fel{
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  color: white;
+}
+
+a.fel:hover{
+  color: lightblue;
+}
+
+#keret{
+  margin-left: 200px;
+  margin-right: 200px;
+  padding: 0;
+  background-color: white;
+}
+footer {
+  background-color: black;
+  padding: 0px
+}
+
+footer ul{
+    padding: 0;
+    padding-bottom: 10px;
+    margin: 0 auto;
+    width: fit-content;
+    font-weight: 400;
+}
+
+footer p{
+  color: white;
+  font-size: 10pt;
+  
+}
+footer h3{
+  font-size: 15pt;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  color: white;
+  text-align: center;
+  
+}
+#fohir ol{
+  padding-left: 20px;
+  font-size: 15pt;
+}
+
+/* • Definiáljunk (és használjunk a HTML oldalon) két különböző stílusú (sorszám nélküli) listát. 
+Használjunk olyan szelektort, ami az elemtípus és az osztályra is megkötést tesz. */
+ul.lista2{
+  padding-top: 10px;
+  padding-left: 20px;
+  list-style-type: "🔴";
+}
+
+ul.lista2 h3{
+  margin-bottom: 0;
+}
+
+ul.lista3{
+  font-size: 20pt;
+  padding-top: 10px;
+  padding-left: 20px;
+  list-style-type: "📺";
+
+}
+
+ul.lista3 li{
+  padding-top:20px;
+}
+
+#fohir h2{
+  font-size: 25pt;
+  font-weight: 700;
+
+}
+
+#fohir h3{
+  margin-top: 20px;
+  margin-bottom: 0;
+  font-size: 18pt;
+  font-weight: 600;
+}
+
+.hir img{
+  width: 400px;
+  height: 200px;
+  align-self: center;
+  padding-right: 20px;
+}
+
+.hir{
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: space-around;
+  gap: 30px;
+  margin-right: 20px;
+
+}
+
+.video{
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 arány */
+  max-width: 100%; /* ne lépje túl a szülőt */
+}
+
+.video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+div.cim{
+  display: flex;
+  justify-content:center;
+}
+.cim img{
+  width: 400px;
+  height: 200px;
+  align-self: center;
+  padding-right: 20px;
+  margin-bottom: 20px;
+}
+
+.cim h3{
+  font-size: 25pt;
+}
+
+.tablacim h3{
+    margin-bottom: 10px;
+}
+
+
+/* • Definiáljunk egy olyan div stílust, mely be van keretezve szaggatott vonallal. A szöveg legyen balra
+tolódva a kereten belül (a jobboldali behúzás–padding–legyen nagyobb). A keret elemei (alsó, felső,
+stb. rész) legyenek más-más színűek. */
+div.tablacim{
+  border-style: dashed;
+  border-width: 4px;
+  border-top-color: red;
+  border-right-color: blue;
+  border-bottom-color: green;
+  border-left-color: orange;
+  text-align: left;
+  margin-top: 30px;
+  margin-bottom: 0;
+
+}
+
+
+/*• Definiáljuk a táblázat esetén két különböző cella-stílust (a két stílus pepita -lásd sakktábla- minta
+szerint váltakozzon). Ne használjunk osztályokat, a HTML-be ne kelljen kézzel jelölőket írni a cellákhoz.*/
+tr:nth-child(odd) td:nth-child(even),
+tr:nth-child(even) td:nth-child(odd) {
+  background-color: lightgray;
+}
+
+tr:nth-child(odd) td:nth-child(odd),
+tr:nth-child(even) td:nth-child(even) {
+  background-color: white;
+}
+
+tr:nth-child(odd) th:nth-child(even),
+tr:nth-child(even) th:nth-child(odd) {
+  background-color: lightgray;
+}
+
+tr:nth-child(odd) th:nth-child(odd),
+tr:nth-child(even) th:nth-child(even) {
+  background-color: white;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+
+td,th {
+  height: 50px;
+  text-align: center;
+  border: 1px solid black;
+}
+
+
+/* Rajzoljunk különböző színű téglalapokból díjkiosztó pódiumot (1., 2., 3 helyezés vagy arany-, ezüst-,
+bronzérem felirattal) */
+
+.box {
+    width: 200px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px 6px 0 0;
+    /* CSS3 átmenetek (transition) segítségével oldjuk meg, hogy a téglalapok mérete változzon
+    amennyiben fölé visszük a kurzort. Ne egyből változzon ez a tulajdonság, hanem graduálisan 2 másodperc
+    folyamán. */
+    transition: height 2s;
+}
+
+.arany {
+    background-color: gold;
+    height: 280px;
+}
+
+.ezust {
+  background-color: silver;
+  height: 220px;
+}
+
+.bronz {
+  background-color: #cd7f32;
+  height: 190px;
+}
+
+.box:hover {
+  height: 320px;
+}
+.podium {
+  background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 20px;
+  height: 360px;
+  padding-bottom: 30px;
+    }
+
+.box img{
+  height: 100px;
+  width:auto;
+}
+

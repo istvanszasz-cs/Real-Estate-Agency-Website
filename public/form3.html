@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="hun">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakas kereso</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="stilus.css">
+</head>
+<body>
+    <div id="keret">
+        <form id="uploadForm" action="/kereses" method="GET" enctype="multipart/form-data">
+            <p>Város: <input type="text" name="varos"></p>
+            <p>Negyed: <input type="text" name="negyed"></p>
+            <p>Minimum ár: <input type="number" name="min_ar"></p>
+            <p>Maximum ár: <input type="number" name="max_ar"></p>
+            <p>Minimum szobaszám: <input type="number" name="min_szoba"></p>
+            <p>Maximum szobaszám: <input type="number" name="min_max"></p>
+            <button type="submit" value="Keresés">Lakás keresése</button>
+        </form>
+    </div>
+</body>
+</html>
