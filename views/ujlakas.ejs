@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="hun">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hirdetes letrehozo</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/public/stilus.css">
+</head>
+<body>
+    <div id="keret">
+        <h1>Ingatlanpont</h1>
+        <%if (typeof hiba !== 'undefined') { %>
+            <p style="color:red;"><%= hiba %></p>
+        <%} %>
+        <form id="uploadForm" action="/letrehozas" method="POST">
+            <p>Hirdetést létrehozó felhasználó:
+                <select name="felhasznaloNev">
+                    <% felhasznalok.forEach(f => { %>
+                        <option value="<%= f.nev %>"><%= f.nev %></option>
+                    <% }) %>
+                </select>
+            </p>
+            <p>Lakás címe (város): <input type="text" name="varos"></p>
+            <p>Lakás címe (negyed): <input type="text" name="negyed"></p>
+            <p>Felszínterületét: <input type="number" name="terulet" min="0"></p>
+            <p>Ára: <input type="number" name="ar" min="0"></p>
+            <p>Szobák száma: <input type="number" name="szoba" min="0"></p>
+            <button type="submit" value="Feltöltés">Hirdetés létrehozása</button>
+        </form>
+       
+        <form id="gombForm" action="/kereses" method="GET">
+            <button type="submit">Vissza a kereséshez</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>© 2025 Ingatlanpont. Minden jog fenntartva.</p>
+        <p>Készítette: Szász István</p>
+        <p>Feladat - Lab5 - Full Stack Web Application</p>
+    </footer>
+</body>
+</html>

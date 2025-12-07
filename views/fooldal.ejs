@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="hun">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakas kereso</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/public/stilus.css">
+</head>
+<body>
+    <div id="keret">
+        <h1>Otthon, édes otthon</h1>
+        <form id="gombForm" action="/letrehozas" method="GET">
+            <button type="submit">Új lakás hírdetés hozzáadása</button>
+        </form>
+        <h2>Lakás keresése:</h2>
+        <%if (typeof hiba !== 'undefined') { %>
+            <p style="color:red;"><%= hiba %></p>
+        <%} else {%>
+        <form id="uploadForm" action="/kereses" method="GET" enctype="multipart/form-data">
+            <p>Felhasználó: <input type="text" name="felhasznaloNev"></p>
+            <p>Város: <input type="text" name="varos"></p>
+            <p>Negyed: <input type="text" name="negyed"></p>
+            <p>Minimum ár: <input type="number" name="min_ar"></p>
+            <p>Maximum ár: <input type="number" name="max_ar"></p>
+            <p>Minimum szobaszám: <input type="number" name="min_szoba"></p>
+            <p>Maximum szobaszám: <input type="number" name="min_max"></p>
+            <button type="submit" value="Keresés">Lakás keresése</button>
+        </form>
+        
+        <h2>Összes találat:</h2>
+        <% if (talalatok.length === 0) { %>
+            <p>Nincs találat.</p>
+        <% } else { %>
+            <% talalatok.forEach(t => { %>
+                <div class="talalat">
+                    <div class="kep">
+                    <p><strong>Kép:</strong></p>
+                    <% if (t.kepURL) { %>
+                        <img src="<%= t.kepURL %>" alt="Lakás képe">
+                    <% } else { %>
+                        <img src="./uploads/noimage.png" alt="Lakás képe">
+                    <% } %>
+                    </div>
+                    <div class="szoveg">
+                        <p><strong>Felhasználó:</strong> <%= t.felhasznaloNev %></p>
+                        <p><strong>ID:</strong> <%= t._id %></p>
+                        <p><strong>Város:</strong> <%= t.varos %></p>
+                        <p><strong>Negyed:</strong> <%= t.negyed %></p>
+                        <p><strong>Terület:</strong> <%= t.terulet %> m²</p>
+                        <p><strong>Ár:</strong> <%= t.ar %> €</p>
+                        <p><strong>Szobák száma:</strong> <%= t.szoba %></p>
+                        <p><a href="/reszletes/<%= t._id %>">Részletes információk</a></p>
+                    </div>
+                </div>
+                <hr>
+            <% }); %>
+            <% } %>
+        <% } %>
+
+    </div>
+    <footer>
+        <p>© 2025 Ingatlanpont. Minden jog fenntartva.</p>
+        <p>Készítette: Szász István</p>
+        <p>Feladat - Lab5 - Full Stack Web Application</p>
+    </footer>
+</body>
+</html>
