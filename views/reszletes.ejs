@@ -12,7 +12,7 @@
         <h2>Részletes információk a lakásról:</h2>
         
         <div class="reszletek">
-    <% if (lakas) { %>
+    <% if (locals.lakas) { %>
         <p><strong>Felhasználó:</strong> <%= lakas.felhasznaloNev %></p>
         <p><strong>ID:</strong> <%= lakas._id %></p>
         <p><strong>Város:</strong> <%= lakas.varos %></p>
@@ -20,20 +20,25 @@
         <p><strong>Terület:</strong> <%= lakas.terulet %> m²</p>
         <p><strong>Ár:</strong> <%= lakas.ar %> €</p>
         <p><strong>Szobák száma:</strong> <%= lakas.szoba %></p>
+        <p><strong>Kép:</strong></p>
+        <% if(lakas.kepURL) {%>
+            <img src="/<%= lakas.kepURL %>" alt="Lakás képe">
+        <%} else {%>
+            <img src="../uploads/noimage.png" alt="Lakás képe">
+        <% } %>
     <% } else { %>
     <% } %>
 </div>
         <h2>Kép feltöltése a lakáshoz:</h2>
-        <%if (typeof hiba !== 'undefined') { %>
-            <p style="color:red;"><%= hiba %></p>
-        <%} else {%>
-            <form id="uploadForm" action="/kep_feltoltes" method="POST" enctype="multipart/form-data">
-                <p>Kép(max 2MB): <input type="file" name="file" accept="image/*"></p>
-                <input type="hidden" name="id" value="<%= lakas._id %>">
-                <button type="submit" value="Feltöltés">Kép feltöltése</button>
-            </form>
+        <p style="color:red;"><%= locals.hiba %></p>
+            <% if(locals.lakas){ %>
+                <form id="uploadForm" action="/kep_feltoltes" method="POST" enctype="multipart/form-data">
+                    <p>Kép(max 2MB): <input type="file" name="file" accept="image/*"></p>
+                    <input type="hidden" name="id" value="<%= locals.lakas._id %>">
+                    <button type="submit" value="Feltöltés">Kép feltöltése</button>
+                </form>
             <% } %>
-            <form id="gombForm" action="/kereses" method="GET">
+            <form id="gombForm" action="/ujratoltes" method="GET">
                 <button type="submit">Vissza a kereséshez</button>
             </form>
 

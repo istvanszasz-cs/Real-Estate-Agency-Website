@@ -13,9 +13,6 @@
             <button type="submit">Új lakás hírdetés hozzáadása</button>
         </form>
         <h2>Lakás keresése:</h2>
-        <%if (typeof hiba !== 'undefined') { %>
-            <p style="color:red;"><%= hiba %></p>
-        <%} else {%>
         <form id="uploadForm" action="/kereses" method="GET" enctype="multipart/form-data">
             <p>Felhasználó: <input type="text" name="felhasznaloNev"></p>
             <p>Város: <input type="text" name="varos"></p>
@@ -28,10 +25,10 @@
         </form>
         
         <h2>Összes találat:</h2>
-        <% if (talalatok.length === 0) { %>
+        <% if (!locals.talalatok || locals.talalatok.length === 0) { %>
             <p>Nincs találat.</p>
         <% } else { %>
-            <% talalatok.forEach(t => { %>
+            <% locals.talalatok.forEach(t => { %>
                 <div class="talalat">
                     <div class="kep">
                     <p><strong>Kép:</strong></p>
@@ -54,8 +51,8 @@
                 </div>
                 <hr>
             <% }); %>
-            <% } %>
         <% } %>
+    
 
     </div>
     <footer>

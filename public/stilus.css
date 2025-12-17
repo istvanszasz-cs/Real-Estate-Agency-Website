@@ -112,3 +112,8 @@ button:hover{
 #uploadForm{
     margin-bottom: 20px;
 }
+
+.hiba{
+   color: red; 
+   font-size: 15pt;
+}

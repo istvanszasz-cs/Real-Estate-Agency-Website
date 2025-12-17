@@ -9,9 +9,7 @@
 <body>
     <div id="keret">
         <h1>Ingatlanpont</h1>
-        <%if (typeof hiba !== 'undefined') { %>
-            <p style="color:red;"><%= hiba %></p>
-        <%} %>
+            <p style="color:red;"><%= locals.hiba %></p>
         <form id="uploadForm" action="/letrehozas" method="POST">
             <p>Hirdetést létrehozó felhasználó:
                 <select name="felhasznaloNev">
@@ -27,8 +25,7 @@
             <p>Szobák száma: <input type="number" name="szoba" min="0"></p>
             <button type="submit" value="Feltöltés">Hirdetés létrehozása</button>
         </form>
-       
-        <form id="gombForm" action="/kereses" method="GET">
+        <form id="gombForm" action="/ujratoltes" method="GET">
             <button type="submit">Vissza a kereséshez</button>
         </form>
     </div>
