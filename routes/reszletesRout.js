@@ -66,7 +66,7 @@ router.get('/reszletes/:id', async (request, response) => {
 });
 
 router.post('/kepTorles', async (request, response) => {
-  const lakasId = sanitize(request.query.hirdetesID);
+  const lakasId = sanitize(request.body.id);
   try {
     const lakasArray = await executeQueryByObjectID(lakasId);
     const lakas = lakasArray[0];
@@ -74,9 +74,9 @@ router.post('/kepTorles', async (request, response) => {
     if (lakas.kepURL !== './uploads/no-image.png') {
       try {
         await fs.unlink(lakas.kepURL);
-        response.json({ valasz: 'Kép sikeresen törölve!' });
         const ujEleresiUt = './uploads/no-image.png';
         await updatePicture(lakasId, ujEleresiUt);
+        response.json({ valasz: 'Kép sikeresen törölve!' });
       } catch (err) {
         console.log(err);
         response.json({ valasz: 'Kép törölése sikertelen!' });

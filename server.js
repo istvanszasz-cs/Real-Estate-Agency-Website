@@ -15,6 +15,7 @@ app.use('/uploads', express.static('uploads'));
 app.use('/public', express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', './views');
+app.use(express.json());
 
 app.use('/', fooldalRoutes);
 app.use('/', ujlakasRoutes);
