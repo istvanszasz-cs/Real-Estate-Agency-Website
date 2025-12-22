@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lakas kereso</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/public/stilus.css">
+    <script src="../public/kep_torles.js"></script>
+
+    <script></script>
 </head>
 <body>
     <div id="keret">
@@ -22,10 +25,13 @@
         <p><strong>Szobák száma:</strong> <%= lakas.szoba %></p>
         <p><strong>Kép:</strong></p>
         <% if(lakas.kepURL) {%>
-            <img src="/<%= lakas.kepURL %>" alt="Lakás képe">
+            <img id="lakasImg" src="/<%= lakas.kepURL %>" alt="Lakás képe">
         <%} else {%>
             <img src="../uploads/noimage.png" alt="Lakás képe">
         <% } %>
+        <input type="hidden" id="hirdetesID" value="<%= lakas._id %>">
+        <p id="visszajelzes"></p>
+        <button id="kepTorloGomb"  type="button">Kép törlése</button>
     <% } else { %>
     <% } %>
 </div>
@@ -46,7 +52,7 @@
     <footer>
         <p>© 2025 Ingatlanpont. Minden jog fenntartva.</p>
         <p>Készítette: Szász István</p>
-        <p>Feladat - Lab5 - Full Stack Web Application</p>
+        <p>Feladat - Lab4-5 - Full Stack Web Application - Ajax</p>
     </footer>
 </body>
 </html>

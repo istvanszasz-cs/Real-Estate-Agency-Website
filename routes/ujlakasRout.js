@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { insertIntoDatabase, getUsers } from '../dal.js';
+import { insertIntoDatabase, getUsers } from '../segedfuggvenyek/dal.js';
 import sanitize from 'mongo-sanitize';
 
 const router = new Router();
@@ -29,6 +29,8 @@ router.post('/letrehozas', async (request, response) => {
     ar: sanitize(Number(request.body.ar)),
     szoba: sanitize(Number(request.body.szoba)),
     felhasznaloNev: sanitize(request.body.felhasznaloNev),
+    datum: new Date(),
+    kepURL: './uploads/no-image.png',
   };
 
   if (ujLakas.varos.trim() === '' || ujLakas.negyed.trim() === '') {

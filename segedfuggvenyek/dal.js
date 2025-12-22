@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 
 let client = null;
 let db = null;
@@ -51,6 +51,17 @@ export async function executeQuery(query) {
   }
 }
 
+export async function executeQueryByObjectID(objIdString) {
+  try {
+    const results = await executeQuery({
+      _id: new ObjectId(objIdString),
+    });
+    return results;
+  } catch (err) {
+    throw new Error(`Hiba a lekérdezés végrehajtása során: ${err.message}`);
+  }
+}
+
 export async function getUsers() {
   const dbLocal = await connectToDatabase();
   const collection = dbLocal.collection('felhasznalok');
@@ -62,6 +73,14 @@ export async function updateDatabase(query, updateData) {
     const dbLocal = await connectToDatabase();
     const collection = dbLocal.collection('hirdetesek');
     await collection.updateOne(query, { $set: updateData });
+  } catch (err) {
+    throw new Error(`Hiba a frissítés során: ${err.message}`);
+  }
+}
+
+export async function updatePicture(id, newPath) {
+  try {
+    await updateDatabase({ _id: new ObjectId(id) }, { kepURL: newPath });
   } catch (err) {
     throw new Error(`Hiba a frissítés során: ${err.message}`);
   }

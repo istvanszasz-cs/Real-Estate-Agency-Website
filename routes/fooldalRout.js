@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { executeQuery } from '../dal.js';
+import { executeQuery, executeQueryByObjectID } from '../segedfuggvenyek/dal.js';
+import sanitize from 'mongo-sanitize';
 
 const router = new Router();
 
@@ -29,6 +30,7 @@ router.get('/kereses', async (request, response) => {
       varos: { $regex: varos, $options: 'i' },
       negyed: { $regex: negyed, $options: 'i' },
     });
+
     response.render('fooldal', { talalatok });
   } catch (err) {
     console.log(err);
@@ -43,6 +45,20 @@ router.get('/ujratoltes', async (request, response) => {
   } catch (err) {
     console.log(err);
     response.status(400).render('hiba', { hiba: 'Hiba történt az oldal betöltése során, próbáld újra később!' });
+  }
+});
+
+router.get('/szoba_datum', async (request, response) => {
+  const hirdetesID = sanitize(request.query.hirdetesID);
+  try {
+    const talalatok = await executeQueryByObjectID(hirdetesID);
+    response.json({
+      szoba: talalatok[0].szoba,
+      datum: talalatok[0].datum,
+    });
+  } catch (err) {
+    console.log(err);
+    response.status(400).send({ hiba: 'Hiba lepett fel az adatbazisban!' });
   }
 });
 

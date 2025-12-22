@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lakas kereso</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/public/stilus.css">
+    <script src="../public/szoba_datum.js"></script>
+
 </head>
 <body>
     <div id="keret">
@@ -20,7 +22,7 @@
             <p>Minimum ár: <input type="number" name="min_ar"></p>
             <p>Maximum ár: <input type="number" name="max_ar"></p>
             <p>Minimum szobaszám: <input type="number" name="min_szoba"></p>
-            <p>Maximum szobaszám: <input type="number" name="min_max"></p>
+            <p>Maximum szobaszám: <input type="number" name="max_szoba"></p>
             <button type="submit" value="Keresés">Lakás keresése</button>
         </form>
         
@@ -29,13 +31,11 @@
             <p>Nincs találat.</p>
         <% } else { %>
             <% locals.talalatok.forEach(t => { %>
-                <div class="talalat">
+                <div class="talalat" id="<%=t._id%>">
                     <div class="kep">
                     <p><strong>Kép:</strong></p>
                     <% if (t.kepURL) { %>
                         <img src="<%= t.kepURL %>" alt="Lakás képe">
-                    <% } else { %>
-                        <img src="./uploads/noimage.png" alt="Lakás képe">
                     <% } %>
                     </div>
                     <div class="szoveg">
@@ -45,7 +45,14 @@
                         <p><strong>Negyed:</strong> <%= t.negyed %></p>
                         <p><strong>Terület:</strong> <%= t.terulet %> m²</p>
                         <p><strong>Ár:</strong> <%= t.ar %> €</p>
-                        <p><strong>Szobák száma:</strong> <%= t.szoba %></p>
+                        <p class="szobaSzam"> 
+                            <strong>Szobák száma:</strong>
+                            <span class="ertek"></span>
+                        </p>
+                        <p class="datum">
+                            <strong>Közzétéve:</strong>
+                            <span class="ertek"></span>
+                        </p>
                         <p><a href="/reszletes/<%= t._id %>">Részletes információk</a></p>
                     </div>
                 </div>
@@ -58,7 +65,7 @@
     <footer>
         <p>© 2025 Ingatlanpont. Minden jog fenntartva.</p>
         <p>Készítette: Szász István</p>
-        <p>Feladat - Lab5 - Full Stack Web Application</p>
+        <p>Feladat - Lab4-5 - Full Stack Web Application - Ajax</p>
     </footer>
 </body>
 </html>

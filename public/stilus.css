@@ -117,3 +117,19 @@ button:hover{
    color: red; 
    font-size: 15pt;
 }
+
+.talalat:hover{
+    cursor: pointer;
+}
+
+.szobaSzam, .datum{
+    display: none;
+}
+
+#kepTorloGomb{
+    background-color: red;
+}
+
+#visszajelzes{
+    color: red;
+}
