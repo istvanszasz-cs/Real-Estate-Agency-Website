@@ -12,9 +12,10 @@
   },
   "devDependencies": {
     "@eslint/js": "9.21.0",
+    "depcheck": "^1.4.7",
+    "ejs": "^3.1.10",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.0.1",
-    "eslint-import-resolver-node": "^0.3.9",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-promise": "7.2.1",
@@ -24,12 +25,10 @@
     "prettier": "^3.7.1"
   },
   "dependencies": {
-    "eslint-import-resolver-typescript": "^4.4.4",
     "express": "^5.1.0",
-    "fs": "^0.0.1-security",
+    "mongo-sanitize": "^1.1.0",
+    "mongodb": "^7.0.0",
     "morgan": "^1.10.1",
-    "multer": "^2.0.2",
-    "nanoid": "^5.1.6",
-    "nedb-promises": "^6.2.3"
+    "multer": "^2.0.2"
   }
 }

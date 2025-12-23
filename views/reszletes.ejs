@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="hun">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakas kereso</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/public/stilus.css">
+    <script src="../public/kep_torles.js"></script>
+
+    <script></script>
+</head>
+<body>
+    <div id="keret">
+        <h1>Otthon, édes otthon</h1>
+        <h2>Részletes információk a lakásról:</h2>
+        
+        <div class="reszletek">
+    <% if (locals.lakas) { %>
+        <p><strong>Felhasználó:</strong> <%= lakas.felhasznaloNev %></p>
+        <p><strong>ID:</strong> <%= lakas._id %></p>
+        <p><strong>Város:</strong> <%= lakas.varos %></p>
+        <p><strong>Negyed:</strong> <%= lakas.negyed %></p>
+        <p><strong>Terület:</strong> <%= lakas.terulet %> m²</p>
+        <p><strong>Ár:</strong> <%= lakas.ar %> €</p>
+        <p><strong>Szobák száma:</strong> <%= lakas.szoba %></p>
+        <p><strong>Kép:</strong></p>
+        <% if(lakas.kepURL) {%>
+            <img id="lakasImg" src="/<%= lakas.kepURL %>" alt="Lakás képe">
+        <%} else {%>
+            <img src="../uploads/noimage.png" alt="Lakás képe">
+        <% } %>
+        <input type="hidden" id="hirdetesID" value="<%= lakas._id %>">
+        <p id="visszajelzes"></p>
+        <button id="kepTorloGomb"  type="button">Kép törlése</button>
+    <% } else { %>
+    <% } %>
+</div>
+        <h2>Kép feltöltése a lakáshoz:</h2>
+        <p style="color:red;"><%= locals.hiba %></p>
+            <% if(locals.lakas){ %>
+                <form id="uploadForm" action="/kep_feltoltes" method="POST" enctype="multipart/form-data">
+                    <p>Kép(max 2MB): <input type="file" name="file" accept="image/*"></p>
+                    <input type="hidden" name="id" value="<%= locals.lakas._id %>">
+                    <button type="submit" value="Feltöltés">Kép feltöltése</button>
+                </form>
+            <% } %>
+            <form id="gombForm" action="/ujratoltes" method="GET">
+                <button type="submit">Vissza a kereséshez</button>
+            </form>
+
+        </div>
+    <footer>
+        <p>© 2025 Ingatlanpont. Minden jog fenntartva.</p>
+        <p>Készítette: Szász István</p>
+        <p>Feladat - Lab4-5 - Full Stack Web Application - Ajax</p>
+    </footer>
+</body>
+</html>

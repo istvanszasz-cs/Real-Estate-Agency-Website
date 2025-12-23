@@ -1,0 +1,48 @@
+[{
+  "_id": {
+    "$oid": "6935f004b0e77c6a3436f4bb"
+  },
+  "varos": "Kolozsvar",
+  "negyed": "Monostor",
+  "terulet": 70,
+  "ar": 60000,
+  "szoba": 4,
+  "felhasznaloNev": "Nagy Péter",
+  "kepURL": "./uploads/no-image.png"
+},
+{
+  "_id": {
+    "$oid": "6935f2c5ebfeffc1847ab139"
+  },
+  "varos": "Gyergyo",
+  "negyed": "Felszeg",
+  "terulet": 1,
+  "ar": 2,
+  "szoba": 3,
+  "felhasznaloNev": "Kiss Anna",
+  "kepURL": "./uploads/no-image.png"
+},
+{
+  "_id": {
+    "$oid": "6935f2eeebfeffc1847ab13a"
+  },
+  "varos": "Csikszereda",
+  "negyed": "g",
+  "terulet": 2,
+  "ar": 3,
+  "szoba": 5,
+  "felhasznaloNev": "Varga Ádám",
+  "kepURL": "./uploads/no-image.png"
+},
+{
+  "_id": {
+    "$oid": "6935f319bd65a5316e5c508d"
+  },
+  "varos": "Tekeropatak",
+  "negyed": "p",
+  "terulet": 2,
+  "ar": 2,
+  "szoba": 2,
+  "felhasznaloNev": "Varga Ádám",
+  "kepURL": "./uploads/no-image.png"
+}]
