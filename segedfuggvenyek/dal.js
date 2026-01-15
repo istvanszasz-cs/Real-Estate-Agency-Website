@@ -14,7 +14,7 @@ export async function connectToDatabase() {
   if (dbValue() !== null) {
     return dbValue();
   }
-  const connectionString = 'mongodb+srv://felhasznalo_rw:felhasznalo@web.rg1jtnl.mongodb.net/';
+  const connectionString = 'mongodb://127.0.0.1:27017';
   client = new MongoClient(connectionString, {
     maxPoolSize: 20,
     minPoolSize: 5,
@@ -44,6 +44,16 @@ export async function executeQuery(query) {
   try {
     const dbLocal = await connectToDatabase();
     const collection = dbLocal.collection('hirdetesek');
+    const results = await collection.find(query).toArray();
+    return results;
+  } catch (err) {
+    throw new Error(`Hiba a lekérdezés végrehajtása során: ${err.message}`);
+  }
+}
+export async function executeQuery2(query) {
+  try {
+    const dbLocal = await connectToDatabase();
+    const collection = dbLocal.collection('felhasznalok');
     const results = await collection.find(query).toArray();
     return results;
   } catch (err) {
@@ -83,6 +93,17 @@ export async function updatePicture(id, newPath) {
     await updateDatabase({ _id: new ObjectId(id) }, { kepURL: newPath });
   } catch (err) {
     throw new Error(`Hiba a frissítés során: ${err.message}`);
+  }
+}
+
+export async function executeQueryByEmail(inputEmail) {
+  try {
+    const results = await executeQuery2({
+      email: inputEmail,
+    });
+    return results;
+  } catch (err) {
+    throw new Error(`Hiba a lekérdezés végrehajtása során: ${err.message}`);
   }
 }
 

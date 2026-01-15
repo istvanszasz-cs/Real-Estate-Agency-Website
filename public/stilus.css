@@ -99,12 +99,14 @@ button:hover{
     cursor: pointer;
 }
 
-#gombForm{
+.gombForm{
     width: 400px;
     align-self: center;
+        background-color: #dcdcdc;
+
 }
 
-#gombForm button{
+.gombForm button{
     width: 100%;
     padding: 10px;
 }
@@ -132,4 +134,21 @@ button:hover{
 
 #visszajelzes{
     color: red;
+}
+
+#loginButton{
+    margin-top: 30px;
+    margin-bottom:  30px;
+}
+#loginForm{
+    background-color: #dcdcdc;
+}
+#felhasznaloDiv{
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    background-color: white;
+    border: 4px solid black;
+    display: flex;
+    justify-content: center;
 }

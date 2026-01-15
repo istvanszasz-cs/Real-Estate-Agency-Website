@@ -4,6 +4,7 @@ import path from 'path';
 import { executeQuery, executeQueryByObjectID, updatePicture } from '../segedfuggvenyek/dal.js';
 import sanitize from 'mongo-sanitize';
 import { upload } from '../segedfuggvenyek/img_handling.js';
+import { authRequired } from '../segedfuggvenyek/login_functions.js';
 
 const router = new Router();
 
@@ -12,14 +13,15 @@ router.post('/kep_feltoltes', upload, async (request, response) => {
 
   const lakasArray = await executeQueryByObjectID(lakasId);
   if (lakasArray.length === 0) {
-    response.status(400).render('hiba', { hiba: 'Hiba: Nem található a keresett ID az adatbázisban!' });
+    response.status(400).render('hiba', { hiba: 'A kép feltöltése sikertelen, próbáld újra később!' });
     return;
   }
 
   const lakas = lakasArray[0];
+  const tulaj = request.session.nev === lakas.felhasznaloNev;
 
   if (request.err) {
-    response.status(500).render('reszletes', { hiba: request.err, lakas });
+    response.status(500).render('reszletes', { hiba: request.err, lakas, tulajdonos: tulaj });
   }
 
   const kiterjesztes = path.extname(request.file.originalname);
@@ -49,23 +51,29 @@ router.get('/reszletes/:id', async (request, response) => {
   try {
     const lakasArray = await executeQueryByObjectID(lakasId);
     if (lakasArray.length === 0) {
-      response.status(400).render('hiba', { hiba: 'A kép feltöltése sikertelen, próbáld újra később!' });
+      response.status(400).render('hiba', { hiba: 'Hiba: Nem található a keresett ID az adatbázisban!' });
       return;
     }
     const lakas = lakasArray[0];
+
     try {
       await fs.access(lakas.kepURL, fs.constants.R_OK);
     } catch {
       lakas.kepURL = './uploads/no-image.png';
     }
-    response.render('reszletes', { lakas });
+    // megnezzuk, ugyanaz-e a szemely, mint aki be van logginolva
+    if (request.session.nev !== lakas.felhasznaloNev) {
+      response.render('reszletes', { lakas, tulajdonos: false });
+    } else {
+      response.render('reszletes', { lakas, tulajdonos: true });
+    }
   } catch (err) {
     console.log(err);
     response.status(400).render('hiba', { hiba: 'Hiba: Az oldalt nem sikerült betölteni!' });
   }
 });
 
-router.post('/kepTorles', async (request, response) => {
+router.post('/kepTorles', authRequired, async (request, response) => {
   const lakasId = sanitize(request.body.id);
   try {
     const lakasArray = await executeQueryByObjectID(lakasId);
