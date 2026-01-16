@@ -1,0 +1,16 @@
+<% if (locals.user == null) {%>
+    <form class="gombForm" action="/login" method="GET">
+        <button id="loginButton">
+            Bejelentkezés
+        </button>
+    </form>
+<% }else{ %>
+    <div id="felhasznaloDiv">
+        <a>Te email-ed: <%= locals.user %></a>
+    </div>
+    <form class="gombForm" action="/logout" method="GET">
+        <button id="loginButton">
+            Kijelentkezés
+        </button>
+    </form>
+<% } %>

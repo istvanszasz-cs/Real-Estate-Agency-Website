@@ -12,6 +12,7 @@
 <body>
     <div id="keret">
         <h1>Otthon, édes otthon</h1>
+        <%- include('../partials/_userInfo') %>
         <h2>Részletes információk a lakásról:</h2>
         
         <div class="reszletek">
@@ -30,13 +31,14 @@
             <img src="../uploads/noimage.png" alt="Lakás képe">
         <% } %>
         <input type="hidden" id="hirdetesID" value="<%= lakas._id %>">
-        <p id="visszajelzes"></p>
+        <% if(locals.tulajdonos == true) {%>
         <button id="kepTorloGomb"  type="button">Kép törlése</button>
-    <% } else { %>
+        <% } %>
     <% } %>
 </div>
+        <% if(locals.tulajdonos == true) {%>
         <h2>Kép feltöltése a lakáshoz:</h2>
-        <p style="color:red;"><%= locals.hiba %></p>
+        <p id="visszajelzes"><%= locals.hiba %></p>
             <% if(locals.lakas){ %>
                 <form id="uploadForm" action="/kep_feltoltes" method="POST" enctype="multipart/form-data">
                     <p>Kép(max 2MB): <input type="file" name="file" accept="image/*"></p>
@@ -44,15 +46,12 @@
                     <button type="submit" value="Feltöltés">Kép feltöltése</button>
                 </form>
             <% } %>
-            <form id="gombForm" action="/ujratoltes" method="GET">
+        <% } %>
+            <form class="gombForm" action="/ujratoltes" method="GET">
                 <button type="submit">Vissza a kereséshez</button>
             </form>
 
         </div>
-    <footer>
-        <p>© 2025 Ingatlanpont. Minden jog fenntartva.</p>
-        <p>Készítette: Szász István</p>
-        <p>Feladat - Lab4-5 - Full Stack Web Application - Ajax</p>
-    </footer>
+    <%- include('../partials/_footer') %>
 </body>
 </html>

@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import { insertIntoDatabase, getUsers } from '../segedfuggvenyek/dal.js';
+import { authRequired } from '../segedfuggvenyek/login_functions.js';
 import sanitize from 'mongo-sanitize';
 
 const router = new Router();
 
-router.get('/letrehozas', async (request, response) => {
+router.get('/letrehozas', authRequired, async (request, response) => {
   try {
     const felhasznalok = await getUsers();
     response.render('ujlakas', { felhasznalok });
@@ -14,7 +15,7 @@ router.get('/letrehozas', async (request, response) => {
   }
 });
 
-router.post('/letrehozas', async (request, response) => {
+router.post('/letrehozas', authRequired, async (request, response) => {
   let felhasznalok = null;
   try {
     felhasznalok = await getUsers();

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="screen" href="/public/stilus.css">
+    <title>Bejelentkezés</title>
+</head>
+<body>
+    <div id="keret">
+         <h1>Otthon, édes otthon</h1>
+        <form id="uploadForm" action="/login" method="POST">
+        <p>Email cím: <input type="text" name="email"></p>
+        <p>Jelszó: <input type="password" name="jelszo"></p>
+        <button type="submit" value="Bejelntkezes">Bejelentkezés</button>
+        <p style="color:red;"><%= locals.hiba %></p>
+    </form>
+    </div>
+
+    <%- include('../partials/_footer') %>
+</body>
+</html>

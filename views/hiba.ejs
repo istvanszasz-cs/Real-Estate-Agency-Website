@@ -9,17 +9,13 @@
 <body>
     <div id="keret">
         <h1>Otthon, édes otthon</h1>
+        <%- include('../partials/_userInfo') %>
         <h2>HIBA!</h2>
         <p class="hiba"><%= hiba %></p>
-        <form id="gombForm" action="/ujratoltes" method="get">
+        <form class="gombForm" action="/ujratoltes" method="get">
         <button type="submit">Vissza a főoldalra</button>
     </form>
     </div>
-
-    <footer>
-        <p>© 2025 Ingatlanpont. Minden jog fenntartva.</p>
-        <p>Készítette: Szász István</p>
-        <p>Feladat - Lab4-5 - Full Stack Web Application - Ajax</p>
-    </footer>
+    <%- include('../partials/_footer') %>
 </body>
 </html>
