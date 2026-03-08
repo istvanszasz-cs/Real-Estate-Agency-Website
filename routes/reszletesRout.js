@@ -87,14 +87,14 @@ router.post('/kepTorles', authRequired, async (request, response) => {
         response.json({ valasz: 'Kép sikeresen törölve!' });
       } catch (err) {
         console.log(err);
-        response.json({ valasz: 'Kép törölése sikertelen!' });
+        response.status(500).json({ valasz: 'Kép törölése sikertelen!' });
       }
     } else {
-      response.json({ valasz: 'Nincs kép feltöltve ehez az ingatlanhoz!' });
+      response.status(400).json({ valasz: 'Nincs kép feltöltve ehez az ingatlanhoz!' });
     }
   } catch (err) {
     console.log(err);
-    response.json({ valasz: 'Hiba lépett fel az adatbázisban.' });
+    response.status(500).json({ valasz: 'Hiba lépett fel az adatbázisban.' });
   }
 });
 

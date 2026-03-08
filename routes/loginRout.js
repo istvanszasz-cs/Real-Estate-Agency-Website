@@ -21,7 +21,7 @@ router.post('/login', async (req, res) => {
     const felhasznalo = queryEredmeny[0];
 
     if (!checkPasswd(jelszo, felhasznalo.so, felhasznalo.hash)) {
-      return res.status(401).render('bejelentkezes', { hiba: 'Hibás email cím vagy jelszó!' });
+      return res.status(401).render('bejelentkezes', { hiba: 'Kicsikutyatarka' });
     }
     setSessionParams(req, felhasznalo);
   } catch (err) {

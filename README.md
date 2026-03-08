@@ -1,9 +1,13 @@
-# Webprogramozás laborfeladatok
-A mongodb adatbazist a tudjuk inicializalni a felhasznalok_feltoltese valamint a hirdetesek_feltoltese
-nevű katalógusokban található .json fájlokkal.
+# Real-Estate-Agency-Website
+This is website is a uni project, showcasing both front- and backend technologies that I`m familiar with.
 
-A szerver elindítása után a 'localhost:<port>/' beírásával a böngészőbe, a weboldal elindul.
-MongoDB Atlast használ, és a database user adatok bele vannak hardcode-olva, úgyhogy elméletileg,
-kellene működjön a tesztelőnél is. ;) 
 
-.
+🛠️ Tech Stack
+
+  -  Frontend: HTML5, CSS3, JavaScript.
+
+  -  Templating Engine: EJS (Embedded JavaScript) for dynamic content.
+
+  -  Backend: Node.js, Express.js.
+
+  -  Database: MongoDB (Local instance).
